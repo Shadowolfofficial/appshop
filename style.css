@@ -1,0 +1,146 @@
+body {
+  background-color: #333;
+}
+
+ 
+   /* When the input field gets focus,
+        change its width to 100% */
+   input[type=text]:focus {
+     width: 70%;
+   }
+ 
+  #list{
+    font-size:  1.5em;
+    margin-left: 90px;
+   }
+ 
+.apps{
+   display: list-item;    
+  } 
+.titre
+{color: white}
+  font-weight: bold;
+  text-decoration: none;
+
+.apps {
+border-radius: 13px;
+}
+
+
+
+
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #18181E;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.installapps {
+  display:block;
+  width:150px;
+  line-height:50px;
+  text-align:center;
+  vertical-align:middle;
+  background:url(bg.png) no-repeat;
+  color:white;
+  text-decoration:none;
+}
+.bouton a:hover {
+  background:url(bg.png) no-repeat;
+}
+.installapps:active {
+    box-shadow: 0 0 ;
+    top: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Barre de navigation */
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #007aff;
+  padding: 10px 20px;
+}
+
+/* Logo */
+.brand {
+  margin-bottom: 20px;
+}
+
+.brand a {
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Barre de recherche */
+.search {
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.search input[type="text"] {
+  width: 200px;
+  height: 30px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+  transition: width 0.4s ease-in-out, transform 0.4s ease-in-out;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.search input[type="text"]:focus {
+  width: 300px;
+}
+
+.search input[type="submit"] {
+  display: none;
+}
+.search-bar {
+  position: relative;
+}
+
+.search-bar input[type="text"] {
+  width: 200px;
+  height: 30px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.4s ease-in-out;
+}
+
+.search-bar input[type="text"]:focus {
+  width: 300px;
+}
