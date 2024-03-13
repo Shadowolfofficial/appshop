@@ -1,146 +1,144 @@
-body {
-  background-color: #333;
-}
-
- 
-   /* When the input field gets focus,
-        change its width to 100% */
-   input[type=text]:focus {
-     width: 70%;
-   }
- 
-  #list{
-    font-size:  1.5em;
-    margin-left: 90px;
-   }
- 
-.apps{
-   display: list-item;    
-  } 
-.titre
-{color: white}
-  font-weight: bold;
-  text-decoration: none;
-
-.apps {
-border-radius: 13px;
-}
-
-
-
-
-*, ::before, ::after {
-    box-sizing: border-box;
+/* Réinitialisation des styles par défaut */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background: #18181E;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #212529;
+    color: #fff; /* Couleur du texte adaptée pour contraster avec le fond */
+    line-height: 1.6;
 }
 
-.installapps {
-  display:block;
-  width:150px;
-  line-height:50px;
-  text-align:center;
-  vertical-align:middle;
-  background:url(bg.png) no-repeat;
-  color:white;
-  text-decoration:none;
-}
-.bouton a:hover {
-  background:url(bg.png) no-repeat;
-}
-.installapps:active {
-    box-shadow: 0 0 ;
-    top: 6px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Barre de navigation */
 nav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #007aff;
-  padding: 10px 20px;
+    background-color: #333;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo */
 .brand {
-  margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.brand a {
-  font-size: 30px;
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
+.titre {
+    font-size: 24px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
 }
 
-/* Barre de recherche */
+.titre:hover {
+    color: #007BFF;
+}
+
 .search {
-  width: 100%;
-  margin-bottom: 20px;
-  position: relative;
+    position: relative;
+    width: 200px;
+    margin: 20px auto;
 }
 
-.search input[type="text"] {
-  width: 200px;
-  height: 30px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 20px;
-  font-size: 16px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  outline: none;
-  transition: width 0.4s ease-in-out, transform 0.4s ease-in-out;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+#searchbar {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #444;
+    color: #fff;
+    transition: background-color 0.3s ease, width 0.3s ease, padding 0.3s ease;
 }
 
-.search input[type="text"]:focus {
-  width: 300px;
+#searchbar:focus {
+    outline: none;
+    background-color: #555;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    width: 100%; /* Conserve la largeur lorsqu'elle est survolée */
+    padding: 10px 20px; /* Augmente le padding pour donner plus d'espace au texte */
 }
 
-.search input[type="submit"] {
-  display: none;
-}
-.search-bar {
-  position: relative;
-}
-
-.search-bar input[type="text"] {
-  width: 200px;
-  height: 30px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 20px;
-  font-size: 16px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  outline: none;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: transform 0.4s ease-in-out;
+/* Animation de changement de couleur et de taille pour la barre de recherche */
+@keyframes searchBarAnimation {
+    0% {
+        background-color: #444;
+        width: 100%;
+        padding: 10px;
+    }
+    50% {
+        background-color: #555;
+        width: 100%;
+        padding: 10px 20px;
+    }
+    100% {
+        background-color: #444;
+        width: 100%;
+        padding: 10px;
+    }
 }
 
-.search-bar input[type="text"]:focus {
-  width: 300px;
+#searchbar:hover {
+    animation: searchBarAnimation 1s infinite;
+}
+
+
+.app-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.app-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 20px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.app-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.app-card img {
+    width: 100%;
+    height: auto;
+}
+
+.app-card h3 {
+    color: #000; /* Titre des applications en noir */
+    margin: 10px 0;
+}
+
+.app-card p {
+    color: #666;
+}
+
+/* Animation de pulse pour les cartes d'applications */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+ }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+ }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+ }
+}
+
+.app-card:hover {
+    animation: pulse 1s infinite;
 }
