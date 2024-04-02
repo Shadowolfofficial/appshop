@@ -1,5 +1,149 @@
-<script language="javascript">
-<!--
-document.write(unescape('%20%20%20%20%20%20%20%20%3C%6D%65%74%61%20%63%68%61%72%73%65%74%3D%22%75%74%66%2D%38%22%3E%0A%20%20%20%20%20%20%20%20%3C%6D%65%74%61%20%6E%61%6D%65%3D%22%76%69%65%77%70%6F%72%74%22%20%63%6F%6E%74%65%6E%74%3D%22%77%69%64%74%68%3D%64%65%76%69%63%65%2D%77%69%64%74%68%2C%20%69%6E%69%74%69%61%6C%2D%73%63%61%6C%65%3D%31%22%3E%0A%20%20%20%20%3C%69%66%72%61%6D%65%20%69%64%3D%22%41%50%50%22%20%73%72%63%3D%22%68%74%74%70%73%3A%2F%2F%72%34%35%36%63%34%74%31%7A%71%7A%65%2D%34%74%35%67%72%2D%2D%2D%31%33%34%2D%34%71%73%35%67%34%65%72%64%73%7A%2E%67%6C%69%74%63%68%2E%6D%65%2F%22%20%66%72%61%6D%65%62%6F%72%64%65%72%3D%22%30%22%20%73%74%79%6C%65%3D%22%6F%76%65%72%66%6C%6F%77%3A%68%69%64%64%65%6E%3B%6F%76%65%72%66%6C%6F%77%2D%78%3A%68%69%64%64%65%6E%3B%6F%76%65%72%66%6C%6F%77%2D%79%3A%68%69%64%64%65%6E%3B%68%65%69%67%68%74%3A%31%30%30%25%3B%77%69%64%74%68%3A%31%30%30%25%3B%70%6F%73%69%74%69%6F%6E%3A%61%62%73%6F%6C%75%74%65%3B%74%6F%70%3A%30%25%3B%6C%65%66%74%3A%30%70%78%3B%72%69%67%68%74%3A%30%70%78%3B%62%6F%74%74%6F%6D%3A%30%70%78%22%20%68%65%69%67%68%74%3D%22%31%30%30%25%22%20%77%69%64%74%68%3D%22%31%30%30%25%22%20%73%61%6E%64%62%6F%78%3D%22%61%6C%6C%6F%77%2D%73%63%72%69%70%74%73%20%61%6C%6C%6F%77%2D%73%61%6D%65%2D%6F%72%69%67%69%6E%20%61%6C%6C%6F%77%2D%66%6F%72%6D%73%22%3E%3C%2F%69%66%72%61%6D%65%3E%0A'));
-//-->
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+:root {
+ --primary-color: #007bff;
+ --secondary-color: #0056b3;
+ --background-color: #f5f7fa;
+ --text-color: #333;
+ --font-family: 'Roboto', sans-serif;
+}
+
+body {
+ font-family: var(--font-family);
+ background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+ background-size: cover;
+ color: var(--text-color);
+ margin: 0;
+ padding: 0;
+ animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+ 0% {
+   background-position: 0% 50%;
+ }
+ 50% {
+   background-position: 100% 50%;
+ }
+ 100% {
+   background-position: 0% 50%;
+ }
+}
+
+#customUrlForm {
+ max-width: 600px;
+ width: 100%;
+ padding: 20px;
+ background-color: #fff;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ border-radius: 8px;
+ margin: 50px auto;
+ animation: fadeIn 0.5s ease-out;
+}
+
+#customUrlForm label {
+ display: block;
+ margin-bottom: 5px;
+}
+
+#customUrlForm input[type="text"] {
+ width: calc(100% - 40px); /* Ajuste la largeur pour ne pas toucher le bord */
+ padding: 10px;
+ margin-bottom: 20px;
+ border: 1px solid #ddd;
+ border-radius: 4px;
+}
+
+#customUrlForm input[type="submit"] {
+ width: 100%;
+ padding: 10px;
+ background-color: var(--primary-color);
+ color: white;
+ border: none;
+ border-radius: 12px;
+ cursor: pointer;
+ transition: background-color 0.3s ease;
+}
+
+#customUrlForm input[type="submit"]:hover {
+ background-color: var(--secondary-color);
+}
+
+.container {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ min-height: 100vh;
+}
+
+h2 {
+ font-size: 2.5em;
+ margin-bottom: 20px;
+}
+
+p {
+ font-size: 1.2em;
+ margin-bottom: 30px;
+}
+
+@media (max-width: 600px) {
+ #customUrlForm {
+    padding: 15px;
+ }
+}
+
+@keyframes fadeIn {
+ from { opacity: 0; }
+ to { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+ <h2>iCorrect</h2>
+ <p>This page was created by ThunderOs for iparcours exercices file.</p>
+
+ <form id="customUrlForm">
+ <div>
+   <label for="part1a">Niveau de classe (uniquement le chiffre)</label>
+   <input type="text" id="part1a" name="part1a">
+ </div>
+ <div>
+   <label for="part1">Année du fichier :</label>
+   <input type="text" id="part1" name="part1">
+ </div>
+ <div>
+   <label for="part2"> Lettre et chiffre en bas de la page du fichier (par exemple G3) : </label>
+   <input type="text" id="part2" name="part2">
+ </div>
+ <div>
+   <label for="part3">Page (Ajoutez un 0 pour les pages en dessous 100 exemple: 028 pour la page 28.):</label>
+ <input type="text" id="part3" name="part3">
+ </div>
+ <input type="submit" value="Confirmer">
+ </form>
+
+ <p>Ce formulaire ne doit pas être rempli en utilisant des lettres majuscules et en ne laissant pas d'espace. Il est important de remplir toutes les informations en utilisant des lettres minuscules sans espace.</p>
+</div>
+
+<script>
+document.getElementById('customUrlForm').addEventListener('submit', function(event){
+ event.preventDefault();
+ var part1a = document.getElementById('part1a').value;
+ var part1 = document.getElementById('part1').value;
+ var part2 = document.getElementById('part2').value;
+ var part3 = document.getElementById('part3').value;
+ var baseUrl = "https://docs.google.com/viewer?url=https://www.iparcours.fr/ouvrages/medias/Complements/correctionPDF/Cahier";
+ var fullUrl = baseUrl + part1a + part1 + "/corpdfcahier" + part1a + part1 + part2 + "p" + part3 + ".pdf&embedded=true";
+
+ window.location.assign(fullUrl);
+
+ this.querySelector('input[type="submit"]').disabled = true;
+});
 </script>
+</body>
+</html>
