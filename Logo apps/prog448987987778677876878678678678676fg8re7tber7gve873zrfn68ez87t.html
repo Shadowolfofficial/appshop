@@ -99,6 +99,24 @@ p {
  from { opacity: 0; }
  to { opacity: 1; }
 }
+
+.close-button {
+ position: fixed;
+ top: 20px;
+ right: 20px;
+ padding: 10px;
+ border: none;
+ background-color: #f00;
+ color: white;
+ cursor: pointer;
+ z-index: 1000;
+ border-radius: 8px;
+ font-weight: bold;
+}
+
+.close-button:hover {
+ background-color: #c00;
+}
 </style>
 </head>
 <body>
@@ -131,18 +149,42 @@ p {
 </div>
 
 <script>
+var iframe = null;
+
 document.getElementById('customUrlForm').addEventListener('submit', function(event){
  event.preventDefault();
  var part1a = document.getElementById('part1a').value;
  var part1 = document.getElementById('part1').value;
  var part2 = document.getElementById('part2').value;
  var part3 = document.getElementById('part3').value;
- var baseUrl = "https://docs.google.com/viewer?url=https://www.iparcours.fr/ouvrages/medias/Complements/correctionPDF/Cahier";
- var fullUrl = baseUrl + part1a + part1 + "/corpdfcahier" + part1a + part1 + part2 + "p" + part3 + ".pdf&embedded=true";
+ var baseUrl = "https://www.iparcours.fr/ouvrages/medias/Complements/correctionPDF/Cahier";
+ var fullUrl = baseUrl + part1a + part1 + "/corpdfcahier" + part1a + part1 + part2 + "p" + part3 + ".pdf";
 
- window.location.assign(fullUrl);
+ if (iframe) {
+   iframe.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(fullUrl) + "&embedded=true";
+ } else {
+   iframe = document.createElement('iframe');
+   iframe.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(fullUrl) + "&embedded=true";
+   iframe.style.width = "100%";
+   iframe.style.height = "100%";
+   iframe.style.border = "none";
+   iframe.style.position = "fixed";
+   iframe.style.top = "0";
+   iframe.style.left = "0";
+   iframe.style.zIndex = "999";
+   document.body.appendChild(iframe);
 
- this.querySelector('input[type="submit"]').disabled = true;
+   var closeButton = document.createElement('button');
+   closeButton.textContent = "Fermer";
+   closeButton.className = "close-button";
+   closeButton.addEventListener('click', function() {
+     document.body.removeChild(iframe);
+     document.body.removeChild(closeButton);
+     iframe = null;
+   });
+
+   document.body.appendChild(closeButton);
+ }
 });
 </script>
 </body>
