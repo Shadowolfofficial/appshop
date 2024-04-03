@@ -2,34 +2,12 @@
 <html>
 <head>
 <style>
-:root {
- --primary-color: #007bff;
- --secondary-color: #0056b3;
- --background-color: #f5f7fa;
- --text-color: #333;
- --font-family: 'Roboto', sans-serif;
-}
-
 body {
- font-family: var(--font-family);
- background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
- background-size: cover;
- color: var(--text-color);
+ font-family: 'Roboto', sans-serif;
+ background-color: #f5f5f5;
+ color: #333;
  margin: 0;
  padding: 0;
- animation: gradient 3s ease infinite;
-}
-
-@keyframes gradient {
- 0% {
-   background-position: 0% 50%;
- }
- 50% {
-   background-position: 100% 50%;
- }
- 100% {
-   background-position: 0% 50%;
- }
 }
 
 #customUrlForm {
@@ -40,7 +18,6 @@ body {
  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
  border-radius: 8px;
  margin: 50px auto;
- animation: fadeIn 0.5s ease-out;
 }
 
 #customUrlForm label {
@@ -49,7 +26,7 @@ body {
 }
 
 #customUrlForm input[type="text"] {
- width: calc(100% - 40px); /* Ajuste la largeur pour ne pas toucher le bord */
+ width: 100%;
  padding: 10px;
  margin-bottom: 20px;
  border: 1px solid #ddd;
@@ -59,18 +36,19 @@ body {
 #customUrlForm input[type="submit"] {
  width: 100%;
  padding: 10px;
- background-color: var(--primary-color);
+ background-color: #007bff;
  color: white;
  border: none;
- border-radius: 12px;
+ border-radius: 4px;
  cursor: pointer;
  transition: background-color 0.3s ease;
 }
 
 #customUrlForm input[type="submit"]:hover {
- background-color: var(--secondary-color);
+ background-color: #0056b3;
 }
 
+/* Styles pour un design plus moderne */
 .container {
  display: flex;
  flex-direction: column;
@@ -89,33 +67,11 @@ p {
  margin-bottom: 30px;
 }
 
+/* Responsive design */
 @media (max-width: 600px) {
  #customUrlForm {
-    padding: 15px;
+ padding: 15px;
  }
-}
-
-@keyframes fadeIn {
- from { opacity: 0; }
- to { opacity: 1; }
-}
-
-.close-button {
- position: fixed;
- top: 20px;
- right: 20px;
- padding: 10px;
- border: none;
- background-color: #f00;
- color: white;
- cursor: pointer;
- z-index: 1000;
- border-radius: 8px;
- font-weight: bold;
-}
-
-.close-button:hover {
- background-color: #c00;
 }
 </style>
 </head>
@@ -142,49 +98,25 @@ p {
    <label for="part3">Page (Ajoutez un 0 pour les pages en dessous 100 exemple: 028 pour la page 28.):</label>
  <input type="text" id="part3" name="part3">
  </div>
- <input type="submit" value="Confirmer">
+ <input type="submit" value="Rediriger">
  </form>
 
  <p>Ce formulaire ne doit pas être rempli en utilisant des lettres majuscules et en ne laissant pas d'espace. Il est important de remplir toutes les informations en utilisant des lettres minuscules sans espace.</p>
 </div>
 
 <script>
-var iframe = null;
-
 document.getElementById('customUrlForm').addEventListener('submit', function(event){
  event.preventDefault();
  var part1a = document.getElementById('part1a').value;
  var part1 = document.getElementById('part1').value;
  var part2 = document.getElementById('part2').value;
  var part3 = document.getElementById('part3').value;
- var baseUrl = "https://www.iparcours.fr/ouvrages/medias/Complements/correctionPDF/Cahier";
- var fullUrl = baseUrl + part1a + part1 + "/corpdfcahier" + part1a + part1 + part2 + "p" + part3 + ".pdf";
+ var baseUrl = "https://docs.google.com/viewer?url=https://www.iparcours.fr/ouvrages/medias/Complements/correctionPDF/Cahier";
+ var fullUrl = baseUrl + part1a + part1 + "/corpdfcahier" + part1a + part1 + part2 + "p" + part3 + ".pdf&embedded=true";
+ window.location.href = fullUrl;
 
- if (iframe) {
-   iframe.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(fullUrl) + "&embedded=true";
- } else {
-   iframe = document.createElement('iframe');
-   iframe.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(fullUrl) + "&embedded=true";
-   iframe.style.width = "100%";
-   iframe.style.height = "100%";
-   iframe.style.border = "none";
-   iframe.style.position = "fixed";
-   iframe.style.top = "0";
-   iframe.style.left = "0";
-   iframe.style.zIndex = "999";
-   document.body.appendChild(iframe);
-
-   var closeButton = document.createElement('button');
-   closeButton.textContent = "Fermer";
-   closeButton.className = "close-button";
-   closeButton.addEventListener('click', function() {
-     document.body.removeChild(iframe);
-     document.body.removeChild(closeButton);
-     iframe = null;
-   });
-
-   document.body.appendChild(closeButton);
- }
+ // Désactiver le bouton de soumission après la première soumission
+ this.querySelector('input[type="submit"]').disabled = true;
 });
 </script>
 </body>
