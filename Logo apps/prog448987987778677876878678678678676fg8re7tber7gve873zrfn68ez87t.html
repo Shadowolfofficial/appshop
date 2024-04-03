@@ -3,14 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>iCorrect</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
   body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,12 +20,11 @@
 
   #customUrlForm {
     max-width: 600px;
-    width: 100%;
+    width: 90%;
     padding: 30px;
     background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
-    transition: background 0.5s ease;
   }
 
   #customUrlForm label {
@@ -76,7 +73,7 @@
 
 <div class="container">
   <div id="customUrlForm">
-    <h2 style="text-align: center;">iCorrect</h2>
+    <h2 style="text-align: center;">iCorrect V1</h2>
     <p style="text-align: center;">This page was created by ThunderOs for iparcours exercices file.</p>
 
     <form id="form">
@@ -96,7 +93,7 @@
         <label for="part3">Page (Ajoutez un 0 pour les pages en dessous 100 exemple: 028 pour la page 28.):</label>
         <input type="text" id="part3" name="part3">
       </div>
-      <input type="submit" value="Rediriger">
+      <input type="submit" value="Confirmer">
     </form>
 
     <p style="text-align: center; font-size: 1.1em;">Ce formulaire ne doit pas être rempli en utilisant des lettres majuscules et en ne laissant pas d'espace. Il est important de remplir toutes les informations en utilisant des lettres minuscules sans espace.</p>
@@ -112,7 +109,9 @@ document.getElementById('form').addEventListener('submit', function(event){
     var part3 = document.getElementById('part3').value.trim();
     var baseUrl = "https://docs.google.com/viewer?url=https://www.iparcours.fr/ouvrages/medias/Complements/correctionPDF/Cahier";
     var fullUrl = baseUrl + part1a + part1 + "/corpdfcahier" + part1a + part1 + part2 + "p" + part3 + ".pdf&embedded=true";
-    window.location.href = fullUrl;
+    setTimeout(function() {
+        window.location.href = fullUrl;
+    }, 50);
 });
 </script>
 
