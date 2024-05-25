@@ -13,9 +13,9 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: linear-gradient(to bottom, #007bff, #0047ab);
-    animation: gradientAnimation 15s infinite alternate;
-    transition: background 0.5s ease;
+    background: linear-gradient(45deg, #007bff, #0047ab, #00c6ff, #0072ff);
+    background-size: 400% 400%;
+    animation: gradientAnimation 8s ease infinite;
   }
 
   #customUrlForm {
@@ -58,19 +58,20 @@
     background-color: #0056b3;
   }
 
-  /* Animation de fond pour varier la luminosité */
   @keyframes gradientAnimation {
     0% {
-      background-color: #007bff;
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
     }
     100% {
-      background-color: #0047ab;
+      background-position: 0% 50%;
     }
   }
 </style>
 </head>
 <body>
-
 <div class="container">
   <div id="customUrlForm">
     <h2 style="text-align: center;">iCorrect V1</h2>
@@ -78,7 +79,7 @@
 
     <form id="form">
       <div>
-        <label for="part1a">Niveau de classe (uniquement le chiffre)</label>
+        <label for="part1a">Niveau de classe</label>
         <input type="text" id="part1a" name="part1a">
       </div>
       <div>
@@ -86,34 +87,37 @@
         <input type="text" id="part1" name="part1">
       </div>
       <div>
-        <label for="part2"> Lettre et chiffre en bas de la page du fichier (par exemple G3) : </label>
+        <label for="part2"> Lettre et chiffre en bas de la page du fichier (par exemple G3)</label>
         <input type="text" id="part2" name="part2">
       </div>
       <div>
-        <label for="part3">Page (Ajoutez un 0 pour les pages en dessous 100 exemple: 028 pour la page 28.):</label>
+        <label for="part3">Page</label>
         <input type="text" id="part3" name="part3">
       </div>
       <input type="submit" value="Confirmer">
     </form>
-
-    <p style="text-align: center; font-size: 1.1em;">Ce formulaire ne doit pas être rempli en utilisant des lettres majuscules et en ne laissant pas d'espace. Il est important de remplir toutes les informations en utilisant des lettres minuscules sans espace.</p>
+    <p style="text-align: center; font-size: 1.1em;">Il est possible que vous deviez appuyer plusieurs fois sur le bouton "Confirmer" ou sur la touche Entrer du clavier. N'hésitez pas à faire cela.</p>
   </div>
 </div>
-
 <script>
-document.getElementById('form').addEventListener('submit', function(event){
+document.getElementById('form').addEventListener('submit', function(event) {
     event.preventDefault();
-    var part1a = document.getElementById('part1a').value.trim();
-    var part1 = document.getElementById('part1').value.trim();
+
+    var part1a = document.getElementById('part1a').value.replace(/\D/g, '');
+    var part1 = document.getElementById('part1').value.replace(/\D/g, '');
     var part2 = document.getElementById('part2').value.trim();
-    var part3 = document.getElementById('part3').value.trim();
+    var part3 = document.getElementById('part3').value.trim().replace(/^0+/, '');
+    
+    // Ajout des zéros pour les pages en dessous de 100
+    if (parseInt(part3) < 100) {
+        part3 = part3.padStart(3, '0');
+    }
+
     var baseUrl = "https://docs.google.com/viewer?url=https://www.iparcours.fr/ouvrages/medias/Complements/correctionPDF/Cahier";
     var fullUrl = baseUrl + part1a + part1 + "/corpdfcahier" + part1a + part1 + part2 + "p" + part3 + ".pdf&embedded=true";
-    setTimeout(function() {
-        window.location.href = fullUrl;
-    }, 50);
+
+    window.location.replace(fullUrl);
 });
 </script>
-
 </body>
 </html>
