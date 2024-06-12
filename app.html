@@ -13,10 +13,14 @@
             <a class="titre" onclick="window.location.href='./bug.html'" style="font-size: 11pt">Proposition & bug</a>
             <a class="titre" style="font-size: 10pt">Nous sommes de retour</a>
             <a class="titre" style="font-size: 10pt">Nous sommes ravis de vous retrouver sur appshop</a>
-            <a class="titre" style="font-size: 10pt">Bienvenue sur Appshop V1.</a>
+            <a class="titre" style="font-size: 10pt">Bienvenue sur Appshop.</a>
         </div>
         <div class="search" for="search-input">
             <input id="searchbar" onkeyup="search_apps()" onkeyup="search_installapps()" type="text" name="search" placeholder="Search apps">
+        </div>
+        <div class="buttons">
+            <button id="saveButton" onclick="saveMainDataToFile()">Sauvegarder</button>
+            <button id="restoreButton" onclick="restoreMainDataFromFile()">Restaurer</button>
         </div>
     </nav>
     <div class="app-container">
@@ -289,9 +293,10 @@
     <img class="apps" src="./Logo apps/ICorrect.png" width="90" height="90">
     <h3>iCorrect</h3>
     <p>Par ThunderOs éléments</p>
-</div>
+        <!-- Fin de la structure de l'application -->
+    </div>
 
-<!-- Fin de la structure de l'application -->
-</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
