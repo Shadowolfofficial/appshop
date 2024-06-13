@@ -96,18 +96,29 @@
       </div>
       <input type="submit" value="Confirmer">
     </form>
-    <p style="text-align: center; font-size: 1.1em;">Il est possible que vous deviez appuyer plusieurs fois sur le bouton "Confirmer" ou sur la touche Entrer du clavier. N'hésitez pas à faire cela.</p>
+    <p id="error-message" style="text-align: center; font-size: 1.1em; color: red; display: none;">Veuillez remplir correctement tous les champs.</p>
   </div>
 </div>
 <script>
 document.getElementById('form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    var part1a = document.getElementById('part1a').value.replace(/\D/g, '');
-    var part1 = document.getElementById('part1').value.replace(/\D/g, '');
+    var part1a = document.getElementById('part1a').value.trim();
+    var part1 = document.getElementById('part1').value.trim();
     var part2 = document.getElementById('part2').value.trim();
     var part3 = document.getElementById('part3').value.trim().replace(/^0+/, '');
-    
+
+    if (part1a === '' || part1 === '' || part2 === '' || part3 === '') {
+        document.getElementById('error-message').style.display = 'block';
+        return;
+    } else {
+        document.getElementById('error-message').style.display = 'none';
+    }
+
+    // Remove non-digit characters from part1a and part1
+    part1a = part1a.replace(/\D/g, '');
+    part1 = part1.replace(/\D/g, '');
+
     // Ajout des zéros pour les pages en dessous de 100
     if (parseInt(part3) < 100) {
         part3 = part3.padStart(3, '0');
