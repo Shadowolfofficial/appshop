@@ -1,8 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-      <title>AppShop</title>
     <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <head>
-<iframe src="./app.html" frameborder="0"
-  style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0%;left:0px;right:0px;bottom:0px"
-  height="100%" width="100%"></iframe>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AppShop</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        .iframe-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        iframe {
+            height: 100%;
+            width: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .buttons {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .buttons button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .buttons button:active {
+            background-color: #004494;
+            transform: translateY(0);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="iframe-container">
+        <iframe src="./app.html"></iframe>
+        <div class="buttons">
+            <button id="saveButton" onclick="saveMainDataToFile()">Sauvegarder</button>
+            <button id="restoreButton" onclick="restoreMainDataFromFile()">Restaurer</button>
+        </div>
+    </div>
+</body>
+</html>
