@@ -31,7 +31,7 @@
 
         .buttons {
             position: absolute;
-            bottom: 20px;
+            bottom: 10px; /* Adjusted value to position buttons lower */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -64,7 +64,7 @@
 </head>
 <body>
     <div class="iframe-container">
-        <iframe src="./app.html"></iframe>
+        <iframe src="./app.html" sandbox="allow-forms allow-modals allow-scripts allow-same-origin allow-downloads" allowfullscreen></iframe>
         <div class="buttons">
             <button id="saveButton" onclick="saveMainDataToFile()">Sauvegarder</button>
             <button id="restoreButton" onclick="restoreMainDataFromFile()">Restaurer</button>
