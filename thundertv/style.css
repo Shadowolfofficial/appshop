@@ -1,136 +1,106 @@
-/* Réinitialisation des styles par défaut */
+/* Style de base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    font-family: 'Lato', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f4f4f9;
     color: #333;
-    line-height: 1.6;
-    overflow-x: hidden;
-    padding: 20px;
 }
 
-/* Navigation */
 nav {
-    background-color: #2c3e50;
+    background-color: #343a40;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-radius: 10px; /* Bordure arrondie pour le conteneur */
-}
-
-.brand {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
 }
 
-.titre {
-    font-size: 24px;
-    color: #ecf0f1;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
+nav .brand a.titre {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 20px;
 }
 
-.titre:hover {
-    color: #3498db;
+nav .brand a:hover {
+    color: #ffdd57;
 }
 
-/* Barre de recherche */
-.search {
-    position: relative;
+nav .search input {
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
     width: 300px;
-    margin: 20px auto;
+    transition: width 0.4s ease-in-out;
 }
 
-#searchbar {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #2c3e50;
-    border-radius: 25px;
-    font-size: 16px;
-    background-color: #ecf0f1;
-    color: #333;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-#searchbar:focus {
+nav .search input:focus {
+    width: 350px;
     outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
-#searchbar::placeholder {
-    color: #95a5a6;
-}
-
-/* Conteneur principal */
+/* Style de la grille des chaînes */
 .app-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
     padding: 20px;
 }
 
-/* Cartes d'applications */
 .app-card {
-    background-color: #fff;
+    background-color: white;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin: 20px;
-    padding: 20px;
-    width: 250px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
 }
 
 .app-card:hover {
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .app-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .app-card h3 {
-    color: #2c3e50;
-    margin: 15px 0;
-    font-size: 20px;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #333;
 }
 
 .app-card p {
-    color: #7f8c8d;
     font-size: 14px;
+    color: #555;
 }
 
-/* Animation de pulse pour les cartes d'applications */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
-  }
-  70% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 20px rgba(52, 152, 219, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
-  }
+/* Style des liens */
+a {
+    color: #007bff;
+    text-decoration: none;
 }
 
-.app-card:hover {
-    animation: pulse 1s infinite;
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Adaptation pour les petits écrans */
+@media (max-width: 768px) {
+    nav .search input {
+        width: 200px;
+    }
+
+    .app-container {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
 }
