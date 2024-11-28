@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>ShuttleBrows</title>
+<style>
+body {
+ font-family: Arial, sans-serif;
+ text-align: center;
+ padding: 50px;
+ background-color: #212529; -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+}
+
+h1 {
+ color: white;
+}
+</style>
+<script>
+// Liste des URL de destination
+var urls = [
+ 'https://browser.rammerhead.org/',
+ 'https://funbags.acompanhantesantoandre.com.br/', //ArtClass Dispenser
+ 'https://math.ynbbs.cc/'
+];
+
+// Sélectionne une URL aléatoire et la charge dans la page courante
+window.onload = function() {
+ window.location.replace(urls[Math.floor(Math.random() * urls.length)]);
+};
+</script>
+</head>
+<body>
+<h1>Recherche d'un serveur...</h1>
+</body>
+</html>
