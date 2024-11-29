@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<script>
-// Liste des URL de destination
-var urls = [
- 'https://browser.rammerhead.org/',
- 'https://funbags.acompanhantesantoandre.com.br/', //ArtClass Dispenser
- 'https://math.ynbbs.cc/'
-];
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Empêche le défilement global */
+        }
 
-// Sélectionne une URL aléatoire et la charge dans la page courante
-window.onload = function() {
- window.location.replace(urls[Math.floor(Math.random() * urls.length)]);
-};
-</script>
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        iframe {
+            position: absolute;
+            top: -74px; /* Décale l'iframe pour masquer le haut */
+            width: 100%;
+            height: calc(100% + 61px); /* Ajuste la hauteur pour compenser le décalage */
+            border: none;
+        }
+    </style>
 </head>
+<body>
+    <div class="iframe-container">
+        <!-- Iframe qui charge directement le site -->
+        <iframe 
+            src="https://webtoppings.bar/browse?url=https://www.google.fr/&region=eu&mode=privacy" 
+            sandbox="allow-same-origin allow-scripts allow-forms">
+        </iframe>
+    </div>
+</body>
 </html>
