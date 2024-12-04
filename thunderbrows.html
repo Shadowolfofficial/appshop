@@ -19,40 +19,55 @@
 
         iframe {
             position: absolute;
-            top: -60px; /* Décale l'iframe pour masquer le haut */
+            top: 0; /* Pas de décalage */
+            left: 0;
             width: 100%;
-            height: calc(100% + 61px); /* Ajuste la hauteur pour compenser le décalage */
+            height: 100%; /* Occupe tout l'espace disponible */
             border: none;
         }
     </style>
     <script>
-        // Fonction pour choisir un lien aléatoire rapidement
-        function getRandomLink() {
-            const links = [
-                "https://play.szvy.win/embed.html#https://www.google.fr",
-                "https://schoolsplayfn.hotunix.com/embed.html#https://www.google.fr",
-                "https://isthistheendfr.mooo.com/embed.html#https://www.google.fr",
-                "https://powerschool.wildsurf.net/embed.html#https://www.google.fr",
-                "https://freemath.site/embed.html#https://www.google.fr",
-                "https://skibidigoonmaxxing.farted.net/embed.html#https://www.google.fr",
-                "https://googlemap.showmyhomes.com/embed.html#https://www.google.fr",
-                "https://efficiency.happyforever.com/embed.html#https://www.google.fr",
-                "https://mathhome.work/embed.html#https://www.google.fr",
-                "https://simple.parakeet.one/"
-            ];
-            return links[Math.floor(Math.random() * links.length)];
-        }
+        // Liste des liens disponibles
+        const links = [
+            "https://play.szvy.win/embed.html#https://www.google.fr",
+            "https://schoolsplayfn.hotunix.com/embed.html#https://www.google.fr",
+            "https://isthistheendfr.mooo.com/embed.html#https://www.google.fr",
+            "https://powerschool.wildsurf.net/embed.html#https://www.google.fr",
+            "https://freemath.site/embed.html#https://www.google.fr",
+            "https://skibidigoonmaxxing.farted.net/embed.html#https://www.google.fr",
+            "https://googlemap.showmyhomes.com/embed.html#https://www.google.fr",
+            "https://efficiency.happyforever.com/embed.html#https://www.google.fr",
+            "https://mathhome.work/embed.html#https://www.google.fr",
+            ""
+        ];
 
-        // Charger l'iframe avec un lien aléatoire
         document.addEventListener("DOMContentLoaded", () => {
             const iframe = document.querySelector("iframe");
-            iframe.src = getRandomLink();
+            const randomLink = links[Math.floor(Math.random() * links.length)];
+
+            // Charger l'iframe avec un lien aléatoire
+            iframe.src = randomLink;
+
+            // Variable pour vérifier si le délai de 2 secondes a été exécuté
+            let reloadExecuted = false;
+
+            // Lorsque l'iframe est complètement chargée, on commence le délai de 2 secondes
+            iframe.onload = () => {
+                if (!reloadExecuted) {
+                    reloadExecuted = true;
+                    // Rechargement après 2 secondes
+                    setTimeout(() => {
+                        iframe.src = ''; // Supprimer d'abord l'URL actuelle
+                        iframe.src = randomLink; // Réassigner le même lien pour recharger l'iframe
+                    }, 1000); // Rechargement après 2 secondes
+                }
+            };
         });
     </script>
 </head>
 <body>
     <div class="iframe-container">
-        <!-- Iframe avec un lien aléatoire -->
+        <!-- Iframe avec rechargement unique -->
         <iframe></iframe>
     </div>
 </body>
