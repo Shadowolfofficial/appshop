@@ -3,180 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-
-    .iframe-container {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-        z-index: 1;
-    }
-
-    /* Animation de chargement */
-    .loading-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #ff7eb3, #8e44ad, #6dd5ed, #2193b0, #fbc2eb, #a6c1ee, #ff9a9e, #fad0c4);
-        background-size: 300% 300%;
-        z-index: 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        animation: gradientBackground 8s infinite;
-    }
-
-    @keyframes gradientBackground {
-        0% {
-            background-position: 0% 50%;
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Empêche le défilement global */
         }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
 
-    .loading-text {
-        font-family: 'Poppins', sans-serif;
-        font-size: 3em;
-        font-weight: bold;
-        color: white;
-        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
-            opacity: 1;
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
         }
-        50% {
-            transform: scale(1.1);
-            opacity: 0.8;
+
+        iframe {
+            position: absolute;
+            top: 0; /* Pas de décalage */
+            left: 0;
+            width: 100%;
+            height: 100%; /* Occupe tout l'espace disponible */
+            border: none;
         }
-    }
+    </style>
+    <script>
+        // L'URL de base que vous souhaitez rendre modifiable
+        const baseUrl = "https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941";
 
-    .hidden {
-        animation: fadeOut 1s forwards;
-    }
-
-    @keyframes fadeOut {
-        to {
-            opacity: 0;
-            visibility: hidden;
-        }
-    }
-</style>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const iframe = document.querySelector("iframe");
-        const loadingOverlay = document.querySelector(".loading-overlay");
-
+        // Liste des liens disponibles avec l'URL de base
         const links = [
-            "https://play.szvy.win/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://schoolsplayfn.hotunix.com/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://isthistheendfr.mooo.com/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://powerschool.wildsurf.net/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://freemath.site/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://skibidigoonmaxxing.farted.net/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://googlemap.showmyhomes.com/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://efficiency.happyforever.com/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://mathhome.work/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://7pqy9f24jz.colorado-photo.com/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://schooltutors.lat/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://fiinacialstatuslooker.v0id.nl/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://szvy.dynuddns.net/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://login.mathcentral.work/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://wqbk7u2p38.magicmossart.ro/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://pluhshahsenns.duckdns.org/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://mathixl.justlearning.net/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://justsomehomework.online/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://powerpoint.icu/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://xn--e4h7981o.princesaleia.cl/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://a2bja6t4jg.585.eu/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://kiddle.website/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://szvy.lol/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://skibidi.cfd/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://4l7qvwgh7w.riceonmars.space/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://szvy.website/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://loose.qwe-qwe.me/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://mehhhh.online/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://szvy.space/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://studycentral.xyz/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://trigonometry.site/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://ixl.photo-frame.com/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://historyhomework.pro/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://ixl-math-learning.hj-household-nas.com/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941",
-            "https://szvyedu.4cloud.click/embed.html#https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941"
+            "https://play.szvy.win/embed.html#" + baseUrl,
+            "https://schoolsplayfn.hotunix.com/embed.html#" + baseUrl,
+            "https://isthistheendfr.mooo.com/embed.html#" + baseUrl,
+            "https://powerschool.wildsurf.net/embed.html#" + baseUrl,
+            "https://freemath.site/embed.html#" + baseUrl,
+            "https://skibidigoonmaxxing.farted.net/embed.html#" + baseUrl,
+            "https://googlemap.showmyhomes.com/embed.html#" + baseUrl,
+            "https://efficiency.happyforever.com/embed.html#" + baseUrl,
+            "https://mathhome.work/embed.html#" + baseUrl,
+            "https://7pqy9f24jz.colorado-photo.com/embed.html#" + baseUrl,
+            "https://schooltutors.lat/embed.html#" + baseUrl,
+            "https://fiinacialstatuslooker.v0id.nl/embed.html#" + baseUrl,
+            "https://szvy.dynuddns.net/embed.html#" + baseUrl,
+            "https://login.mathcentral.work/embed.html#" + baseUrl,
+            "https://wqbk7u2p38.magicmossart.ro/embed.html#" + baseUrl,
+            "https://pluhshahsenns.duckdns.org/embed.html#" + baseUrl,
+            "https://mathixl.justlearning.net/embed.html#" + baseUrl,
+            "https://justsomehomework.online/embed.html#" + baseUrl,
+            "https://powerpoint.icu/embed.html#" + baseUrl,
+            "https://xn--e4h7981o.princesaleia.cl/embed.html#" + baseUrl,
+            "https://a2bja6t4jg.585.eu/embed.html#" + baseUrl,
+            "https://kiddle.website/embed.html#" + baseUrl,
+            "https://szvy.lol/embed.html#" + baseUrl,
+            "https://skibidi.cfd/embed.html#" + baseUrl,
+            "https://4l7qvwgh7w.riceonmars.space/embed.html#" + baseUrl,
+            "https://szvy.website/embed.html#" + baseUrl,
+            "https://loose.qwe-qwe.me/embed.html#" + baseUrl,
+            "https://mehhhh.online/embed.html#" + baseUrl,
+            "https://szvy.space/embed.html#" + baseUrl,
+            "https://studycentral.xyz/embed.html#" + baseUrl,
+            "https://trigonometry.site/embed.html#" + baseUrl,
+            "https://ixl.photo-frame.com/embed.html#" + baseUrl,
+            "https://historyhomework.pro/embed.html#" + baseUrl,
+            "https://ixl-math-learning.hj-household-nas.com/embed.html#" + baseUrl,
+            "https://szvyedu.4cloud.click/embed.html#" + baseUrl
         ];
 
-        // Charger un lien aléatoire dans l'iframe
-        let randomLink = links[Math.floor(Math.random() * links.length)];
-        iframe.src = randomLink;
+        document.addEventListener("DOMContentLoaded", () => {
+            const iframe = document.querySelector("iframe");
+            const randomLink = links[Math.floor(Math.random() * links.length)];
 
-        let reloadCount = 0; // Compteur de rechargements
-        const maxReloads = 2; // Nombre de rechargements attendu
-        const reloadInterval = 2000; // Intervalle entre rechargements (en ms)
+            // Charger l'iframe avec un lien aléatoire
+            iframe.src = randomLink;
 
-        // Calculer la durée totale nécessaire pour maintenir le chargement visible
-        const totalLoadingTime = reloadInterval * (maxReloads + 1); // +1 pour le chargement initial
+            // Variable pour vérifier si le délai de 2 secondes a été exécuté
+            let reloadExecuted = false;
 
-        // Fonction pour gérer les rechargements
-        const handleReload = () => {
-            reloadCount++;
-
-            // Si le nombre de rechargements n'est pas encore atteint
-            if (reloadCount < maxReloads) {
-                setTimeout(() => {
-                    iframe.src = ''; // Supprimer l'URL actuelle pour forcer un reload
-                    iframe.src = randomLink; // Réassigner le lien pour recharger
-                }, reloadInterval);
-            }
-        };
-
-        // Écouter l'événement onload de l'iframe
-        iframe.onload = () => {
-            handleReload(); // Recharger l'iframe
-        };
-
-        // Masquer le chargement après que tous les rechargements soient terminés
-        const checkIfAllReloadsDone = setInterval(() => {
-            if (reloadCount >= maxReloads) {
-                clearInterval(checkIfAllReloadsDone); // Arrêter le check une fois que les reloads sont finis
-                setTimeout(() => {
-                    loadingOverlay.classList.add("hidden"); // Cacher le chargement après tous les reloads
-                }, reloadInterval); // Attendre l'intervalle avant de masquer
-            }
-        }, 6100); // Vérification toutes les 500 ms
-    });
-</script>
+            // Lorsque l'iframe est complètement chargée, on commence le délai de 2 secondes
+            iframe.onload = () => {
+                if (!reloadExecuted) {
+                    reloadExecuted = true;
+                    // Rechargement après 2 secondes
+                    setTimeout(() => {
+                        iframe.src = ''; // Supprimer d'abord l'URL actuelle
+                        iframe.src = randomLink; // Réassigner le même lien pour recharger l'iframe
+                    }, 1000); // Rechargement après 2 secondes
+                }
+            };
+        });
+    </script>
 </head>
 <body>
     <div class="iframe-container">
-        <!-- Animation de chargement -->
-        <div class="loading-overlay">
-            <div class="loading-text">ThunderBrows</div>
-        </div>
-        <!-- Iframe -->
+        <!-- Iframe avec rechargement unique -->
         <iframe></iframe>
     </div>
 </body>
