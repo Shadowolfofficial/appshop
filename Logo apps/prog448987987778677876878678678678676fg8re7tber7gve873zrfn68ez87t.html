@@ -80,8 +80,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    max-width: 700px;
+    height: 80%;
     background: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     border-radius: 12px;
@@ -137,11 +138,12 @@
 <body>
 <div class="container">
   <div id="customUrlForm">
-    <h2 style="text-align: center;">iCorrect</h2>
+    <h2 style="text-align: center;">iCorrect V1</h2>
     <p style="text-align: center;">This page was created by ThunderOs for iparcours exercices file.</p>
 
     <p style="text-align: center; margin-top: 20px; color: #555; font-size: 1em;">
-Voir les Cahiers d'Exercices vous permet de vérifier la date du cahier d'exercice ou la lettre et le chiffre situés en bas de la page du fichier (Commme G3).    </p>
+      Ce formulaire permet de générer un lien vers le corrigé des exercices. Cliquez sur "Voir les Cahiers d'Exercices" pour accéder à un exemple de fichier.
+    </p>
 
     <form id="form">
       <div>
@@ -183,11 +185,13 @@ document.getElementById('form').addEventListener('submit', function(event) {
     var part2 = document.getElementById('part2').value.trim().toLowerCase(); // Convertir en minuscules
     var part3 = document.getElementById('part3').value.trim().replace(/^0+/, '');
 
+    // Vérification des champs vides
     if (part1a === '' || part1 === '' || part2 === '' || part3 === '') {
         alert("Veuillez remplir correctement tous les champs !");
         return;
     }
 
+    // Nettoyage des valeurs
     part1a = part1a.replace(/\D/g, '');
     part1 = part1.replace(/\D/g, '');
 
@@ -205,9 +209,30 @@ document.getElementById('form').addEventListener('submit', function(event) {
 
     // Relancer l'iframe après 2 secondes
     setTimeout(function() {
-        document.getElementById('popupIframe').src = fullUrl;
+        document.getElementById('popupIframe').src = fullUrl; // "Relancer" l'iframe
     }, 2000);
 });
+
+document.getElementById('viewCahierBtn').addEventListener('click', function() {
+    const cahierUrl = "https://example.com/votre-cahier-d-exercices.pdf";
+    document.getElementById('popupIframe').src = cahierUrl;
+    document.getElementById('redirectPopup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+
+    // Relancer l'iframe après 2 secondes
+    setTimeout(function() {
+        document.getElementById('popupIframe').src = cahierUrl; // "Relancer" l'iframe
+    }, 2000);
+});
+
+document.getElementById('closePopup').addEventListener('click', closePopup);
+document.getElementById('overlay').addEventListener('click', closePopup);
+
+function closePopup() {
+    document.getElementById('redirectPopup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('popupIframe').src = "about:blank"; // Reset iframe source when closing
+}
 </script>
 </body>
 </html>
