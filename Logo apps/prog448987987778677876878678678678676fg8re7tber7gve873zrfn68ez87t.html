@@ -58,6 +58,69 @@
     background-color: #0056b3;
   }
 
+  .view-cahier-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .view-cahier-btn:hover {
+    background-color: #218838;
+  }
+
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    z-index: 1000;
+    overflow: hidden;
+  }
+
+  .popup .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2em;
+    color: #888;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  .popup .close-btn:hover {
+    color: #555;
+  }
+
+  .popup iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
   @keyframes gradientAnimation {
     0% {
       background-position: 0% 50%;
@@ -74,8 +137,11 @@
 <body>
 <div class="container">
   <div id="customUrlForm">
-    <h2 style="text-align: center;">iCorrect V1</h2>
+    <h2 style="text-align: center;">iCorrect V2</h2>
     <p style="text-align: center;">This page was created by ThunderOs for iparcours exercices file.</p>
+
+    <p style="text-align: center; margin-top: 20px; color: #555; font-size: 1em;">
+Voir les Cahiers d'Exercices vous permet de vérifier la date du cahier d'exercice ou la lettre et le chiffre situés en bas de la page du fichier (Commme G3).    </p>
 
     <form id="form">
       <div>
@@ -96,9 +162,18 @@
       </div>
       <input type="submit" value="Confirmer">
     </form>
-    <p id="error-message" style="text-align: center; font-size: 1.1em; color: red; display: none;">Veuillez remplir correctement tous les champs.</p>
+
+    <button class="view-cahier-btn" id="viewCahierBtn">Voir les Cahiers d'Exercices</button>
   </div>
 </div>
+
+<div id="overlay"></div>
+
+<div class="popup" id="redirectPopup">
+  <button class="close-btn" id="closePopup">&times;</button>
+  <iframe id="popupIframe" src="about:blank" title="Cahiers d'exercices"></iframe>
+</div>
+
 <script>
 document.getElementById('form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -109,17 +184,13 @@ document.getElementById('form').addEventListener('submit', function(event) {
     var part3 = document.getElementById('part3').value.trim().replace(/^0+/, '');
 
     if (part1a === '' || part1 === '' || part2 === '' || part3 === '') {
-        document.getElementById('error-message').style.display = 'block';
+        alert("Veuillez remplir correctement tous les champs !");
         return;
-    } else {
-        document.getElementById('error-message').style.display = 'none';
     }
 
-    // Remove non-digit characters from part1a and part1
     part1a = part1a.replace(/\D/g, '');
     part1 = part1.replace(/\D/g, '');
 
-    // Ajout des zéros pour les pages en dessous de 100
     if (parseInt(part3) < 100) {
         part3 = part3.padStart(3, '0');
     }
@@ -127,8 +198,37 @@ document.getElementById('form').addEventListener('submit', function(event) {
     var baseUrl = "https://docs.google.com/viewer?url=https://www.iparcours.fr/ouvrages/medias/Complements/correctionPDF/Cahier";
     var fullUrl = baseUrl + part1a + part1 + "/corpdfcahier" + part1a + part1 + part2 + "p" + part3 + ".pdf&embedded=true";
 
-    window.location.replace(fullUrl);
+    // Affichage du popup avec l'iframe
+    document.getElementById('popupIframe').src = fullUrl;
+    document.getElementById('redirectPopup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+
+    // Relancer l'iframe après 2 secondes
+    setTimeout(function() {
+        document.getElementById('popupIframe').src = fullUrl;
+    }, 2000);
 });
+
+document.getElementById('viewCahierBtn').addEventListener('click', function() {
+    const cahierUrl = "https://www.iparcours.fr/ouvrages/";
+    document.getElementById('popupIframe').src = cahierUrl;
+    document.getElementById('redirectPopup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+
+    // Relancer l'iframe après 2 secondes
+    setTimeout(function() {
+        document.getElementById('popupIframe').src = cahierUrl;
+    }, 2000);
+});
+
+document.getElementById('closePopup').addEventListener('click', closePopup);
+document.getElementById('overlay').addEventListener('click', closePopup);
+
+function closePopup() {
+    document.getElementById('redirectPopup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('popupIframe').src = "about:blank";
+}
 </script>
 </body>
 </html>
