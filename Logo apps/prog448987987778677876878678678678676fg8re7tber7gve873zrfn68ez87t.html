@@ -180,7 +180,7 @@ document.getElementById('form').addEventListener('submit', function(event) {
 
     var part1a = document.getElementById('part1a').value.trim();
     var part1 = document.getElementById('part1').value.trim();
-    var part2 = document.getElementById('part2').value.trim();
+    var part2 = document.getElementById('part2').value.trim().toLowerCase(); // Convertir en minuscules
     var part3 = document.getElementById('part3').value.trim().replace(/^0+/, '');
 
     if (part1a === '' || part1 === '' || part2 === '' || part3 === '') {
@@ -208,27 +208,6 @@ document.getElementById('form').addEventListener('submit', function(event) {
         document.getElementById('popupIframe').src = fullUrl;
     }, 2000);
 });
-
-document.getElementById('viewCahierBtn').addEventListener('click', function() {
-    const cahierUrl = "https://www.iparcours.fr/ouvrages/";
-    document.getElementById('popupIframe').src = cahierUrl;
-    document.getElementById('redirectPopup').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-
-    // Relancer l'iframe après 2 secondes
-    setTimeout(function() {
-        document.getElementById('popupIframe').src = cahierUrl;
-    }, 2000);
-});
-
-document.getElementById('closePopup').addEventListener('click', closePopup);
-document.getElementById('overlay').addEventListener('click', closePopup);
-
-function closePopup() {
-    document.getElementById('redirectPopup').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-    document.getElementById('popupIframe').src = "about:blank";
-}
 </script>
 </body>
 </html>
