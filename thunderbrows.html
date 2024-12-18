@@ -1,238 +1,105 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: linear-gradient(45deg, #007bff, #0047ab, #00c6ff, #0072ff);
-    background-size: 400% 400%;
-    animation: gradientAnimation 8s ease infinite;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
-  #customUrlForm {
-    max-width: 600px;
-    width: 90%;
-    padding: 30px;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-  }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-  #customUrlForm label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-  }
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+    <script>
+        // Table de correspondance entre les codes cryptés et les URL réelles
+        const urlMap = {
+            "my1": "https://www.myinstants.com/fr/index/fr/",
+            "s9age": "https://soundpage.pages.dev/",
+            "vm0d": "https://tuna.voicemod.net/memes/"
+        };
 
-  #customUrlForm input[type="text"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1em;
-  }
+        // Fonction pour récupérer les paramètres de l'URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
-  #customUrlForm input[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 1.2em;
-  }
+        document.addEventListener("DOMContentLoaded", () => {
+            // Récupérer le code crypté de l'URL
+            const encryptedCode = getQueryParam('baseUrl');
 
-  #customUrlForm input[type="submit"]:hover {
-    background-color: #0056b3;
-  }
+            // Décoder l'URL à partir du code ou utiliser une URL par défaut
+            const baseUrl = urlMap[encryptedCode] || "https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941/";
 
-  .view-cahier-btn {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.2em;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-  }
+            // Liste des liens disponibles avec l'URL décodée
+            const links = [
+                "https://play.szvy.win/embed.html#" + baseUrl,
+                "https://schoolsplayfn.hotunix.com/embed.html#" + baseUrl,
+                "https://isthistheendfr.mooo.com/embed.html#" + baseUrl,
+                "https://powerschool.wildsurf.net/embed.html#" + baseUrl,
+                "https://freemath.site/embed.html#" + baseUrl,
+                "https://skibidigoonmaxxing.farted.net/embed.html#" + baseUrl,
+                "https://googlemap.showmyhomes.com/embed.html#" + baseUrl,
+                "https://efficiency.happyforever.com/embed.html#" + baseUrl,
+                "https://mathhome.work/embed.html#" + baseUrl,
+                "https://7pqy9f24jz.colorado-photo.com/embed.html#" + baseUrl,
+                "https://schooltutors.lat/embed.html#" + baseUrl,
+                "https://szvy.dynuddns.net/embed.html#" + baseUrl,
+                "https://login.mathcentral.work/embed.html#" + baseUrl,
+                "https://wqbk7u2p38.magicmossart.ro/embed.html#" + baseUrl,
+                "https://pluhshahsenns.duckdns.org/embed.html#" + baseUrl,
+                "https://mathixl.justlearning.net/embed.html#" + baseUrl,
+                "https://justsomehomework.online/embed.html#" + baseUrl,
+                "https://powerpoint.icu/embed.html#" + baseUrl,
+                "https://xn--e4h7981o.princesaleia.cl/embed.html#" + baseUrl,
+                "https://a2bja6t4jg.585.eu/embed.html#" + baseUrl,
+                "https://szvy.lol/embed.html#" + baseUrl,
+                "https://skibidi.cfd/embed.html#" + baseUrl,
+                "https://4l7qvwgh7w.riceonmars.space/embed.html#" + baseUrl,
+                "https://szvy.website/embed.html#" + baseUrl,
+                "https://loose.qwe-qwe.me/embed.html#" + baseUrl,
+                "https://mehhhh.online/embed.html#" + baseUrl,
+                "https://szvy.space/embed.html#" + baseUrl,
+                "https://studycentral.xyz/embed.html#" + baseUrl,
+                "https://trigonometry.site/embed.html#" + baseUrl,
+                "https://ixl.photo-frame.com/embed.html#" + baseUrl,
+                "https://historyhomework.pro/embed.html#" + baseUrl,
+                "https://ixl-math-learning.hj-household-nas.com/embed.html#" + baseUrl,
+                "https://szvyedu.4cloud.click/embed.html#" + baseUrl
+            ];
 
-  .view-cahier-btn:hover {
-    background-color: #218838;
-  }
+            // Charger un lien aléatoire dans l'iframe
+            const iframe = document.querySelector("iframe");
+            const randomLink = links[Math.floor(Math.random() * links.length)];
+            iframe.src = randomLink;
 
-  .popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 700px;
-    height: 80%;
-    background: white;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    z-index: 1000;
-    overflow: hidden;
-  }
-
-  .popup .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.2em;
-    color: #888;
-    cursor: pointer;
-    border: none;
-    background: none;
-  }
-
-  .popup .close-btn:hover {
-    color: #555;
-  }
-
-  .popup iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  #overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-  }
-
-  @keyframes gradientAnimation {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-</style>
+            // Recharger une seule fois après 1500 ms
+            setTimeout(() => {
+                iframe.src = ''; // Supprimer l'URL actuelle (optionnel, pour forcer le rechargement)
+                iframe.src = randomLink; // Réassigner l'URL pour recharger
+            }, 1800);
+        });
+    </script>
 </head>
 <body>
-<div class="container">
-  <div id="customUrlForm">
-    <h2 style="text-align: center;">iCorrect V1</h2>
-    <p style="text-align: center;">This page was created by ThunderOs for iparcours exercices file.</p>
-
-    <p style="text-align: center; margin-top: 20px; color: #555; font-size: 1em;">
-      Ce formulaire permet de générer un lien vers le corrigé des exercices. Cliquez sur "Voir les Cahiers d'Exercices" pour accéder à un exemple de fichier.
-    </p>
-
-    <form id="form">
-      <div>
-        <label for="part1a">Niveau de classe</label>
-        <input type="text" id="part1a" name="part1a">
-      </div>
-      <div>
-        <label for="part1">Année du fichier :</label>
-        <input type="text" id="part1" name="part1">
-      </div>
-      <div>
-        <label for="part2"> Lettre et chiffre en bas de la page du fichier (par exemple G3)</label>
-        <input type="text" id="part2" name="part2">
-      </div>
-      <div>
-        <label for="part3">Page</label>
-        <input type="text" id="part3" name="part3">
-      </div>
-      <input type="submit" value="Confirmer">
-    </form>
-
-    <button class="view-cahier-btn" id="viewCahierBtn">Voir les Cahiers d'Exercices</button>
-  </div>
-</div>
-
-<div id="overlay"></div>
-
-<div class="popup" id="redirectPopup">
-  <button class="close-btn" id="closePopup">&times;</button>
-  <iframe id="popupIframe" src="about:blank" title="Cahiers d'exercices"></iframe>
-</div>
-
-<script>
-document.getElementById('form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    var part1a = document.getElementById('part1a').value.trim();
-    var part1 = document.getElementById('part1').value.trim();
-    var part2 = document.getElementById('part2').value.trim().toLowerCase(); // Convertir en minuscules
-    var part3 = document.getElementById('part3').value.trim().replace(/^0+/, '');
-
-    // Vérification des champs vides
-    if (part1a === '' || part1 === '' || part2 === '' || part3 === '') {
-        alert("Veuillez remplir correctement tous les champs !");
-        return;
-    }
-
-    // Nettoyage des valeurs
-    part1a = part1a.replace(/\D/g, '');
-    part1 = part1.replace(/\D/g, '');
-
-    if (parseInt(part3) < 100) {
-        part3 = part3.padStart(3, '0');
-    }
-
-    var baseUrl = "https://docs.google.com/viewer?url=https://www.iparcours.fr/ouvrages/medias/Complements/correctionPDF/Cahier";
-    var fullUrl = baseUrl + part1a + part1 + "/corpdfcahier" + part1a + part1 + part2 + "p" + part3 + ".pdf&embedded=true";
-
-    // Affichage du popup avec l'iframe
-    document.getElementById('popupIframe').src = fullUrl;
-    document.getElementById('redirectPopup').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-
-    // Relancer l'iframe après 2 secondes
-    setTimeout(function() {
-        document.getElementById('popupIframe').src = fullUrl; // "Relancer" l'iframe
-    }, 2000);
-});
-
-document.getElementById('viewCahierBtn').addEventListener('click', function() {
-    const cahierUrl = "https://example.com/votre-cahier-d-exercices.pdf";
-    document.getElementById('popupIframe').src = cahierUrl;
-    document.getElementById('redirectPopup').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-
-    // Relancer l'iframe après 2 secondes
-    setTimeout(function() {
-        document.getElementById('popupIframe').src = cahierUrl; // "Relancer" l'iframe
-    }, 2000);
-});
-
-document.getElementById('closePopup').addEventListener('click', closePopup);
-document.getElementById('overlay').addEventListener('click', closePopup);
-
-function closePopup() {
-    document.getElementById('redirectPopup').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-    document.getElementById('popupIframe').src = "about:blank"; // Reset iframe source when closing
-}
-</script>
+    <div class="iframe-container">
+        <iframe></iframe>
+    </div>
 </body>
 </html>
