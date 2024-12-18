@@ -7,7 +7,7 @@
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Empêche le défilement global */
+            overflow: hidden;
         }
 
         .iframe-container {
@@ -27,6 +27,13 @@
         }
     </style>
     <script>
+        // Table de correspondance entre les codes cryptés et les URL réelles
+        const urlMap = {
+            "my1": "https://www.myinstants.com/fr/index/fr/",
+            "s9age": "https://soundpage.pages.dev/",
+            "vm0d": "https://tuna.voicemod.net/memes"
+        };
+
         // Fonction pour récupérer les paramètres de l'URL
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
@@ -34,11 +41,13 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            // L'URL de base modifiable via un paramètre d'URL
-            const defaultBaseUrl = "https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941";
-            const baseUrl = getQueryParam('baseUrl') || defaultBaseUrl;
+            // Récupérer le code crypté de l'URL
+            const encryptedCode = getQueryParam('baseUrl');
 
-            // Liste des liens disponibles avec l'URL de base
+            // Décoder l'URL à partir du code ou utiliser une URL par défaut
+            const baseUrl = urlMap[encryptedCode] || "https://www.startpage.com/do/mypage.pl?prfe=1288cecbc69fc6693ac28083c3e3eda54cef680a0caebda2d1099ba3924535bf6ff875beef8bf7de08dcccf7c7190711c9877764ad0cefc53537c5c80de95262ec148756418dad10eef206340941";
+
+            // Liste des liens disponibles avec l'URL décodée
             const links = [
                 "https://play.szvy.win/embed.html#" + baseUrl,
                 "https://schoolsplayfn.hotunix.com/embed.html#" + baseUrl,
@@ -75,24 +84,21 @@
                 "https://szvyedu.4cloud.click/embed.html#" + baseUrl
             ];
 
+            // Charger un lien aléatoire dans l'iframe
             const iframe = document.querySelector("iframe");
             const randomLink = links[Math.floor(Math.random() * links.length)];
-
-            // Charger l'iframe avec un lien aléatoire
             iframe.src = randomLink;
 
-            // Variable pour vérifier si le délai de 1 seconde a été exécuté
+            // Ajouter une fonctionnalité de rechargement
             let reloadExecuted = false;
 
-            // Lorsque l'iframe est complètement chargée, on commence le délai de 2 secondes
             iframe.onload = () => {
                 if (!reloadExecuted) {
                     reloadExecuted = true;
-                    // Rechargement après 2 secondes
                     setTimeout(() => {
                         iframe.src = ''; // Supprimer d'abord l'URL actuelle
                         iframe.src = randomLink; // Réassigner le même lien pour recharger l'iframe
-                    }, 1000); // Rechargement après 2 secondes
+                    }, 1000); // Rechargement après 1 secondes
                 }
             };
         });
@@ -100,7 +106,6 @@
 </head>
 <body>
     <div class="iframe-container">
-        <!-- Iframe avec rechargement unique -->
         <iframe></iframe>
     </div>
 </body>
