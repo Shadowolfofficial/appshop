@@ -89,7 +89,7 @@
             const randomLink = links[Math.floor(Math.random() * links.length)];
             iframe.src = randomLink;
 
-            // Ajouter une fonctionnalité de rechargement
+            // Ajouter une fonctionnalité de rechargement optimisé
             let reloadExecuted = false;
 
             iframe.onload = () => {
@@ -98,7 +98,7 @@
                     setTimeout(() => {
                         iframe.src = ''; // Supprimer d'abord l'URL actuelle
                         iframe.src = randomLink; // Réassigner le même lien pour recharger l'iframe
-                    }, 1000); // Rechargement après 1 secondes
+                    }, 1500); // Rechargement après 1 secondes
                 }
             };
         });
