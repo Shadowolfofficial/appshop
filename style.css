@@ -142,3 +142,29 @@ nav {
 .app-card:hover {
     animation: pulse 1s infinite;
 }
+
+/* Debut Original ThunderOs Element*/
+
+.animated-text {
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #FF5733, #4A90E2, #FFD700, #E91E63); /* Dégradé de couleurs */
+    background-size: 400% 400%; /* Ajuste la taille du dégradé pour l'animation */
+    -webkit-background-clip: text; /* Applique le dégradé au texte */
+    color: transparent; /* Rend le texte transparent pour voir l'effet de dégradé */
+    animation: gradientAnimation 5s ease infinite; /* Animation de changement de dégradé */
+}
+
+/* Animation pour le dégradé */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+/* Fin Original ThunderOs Element*/
