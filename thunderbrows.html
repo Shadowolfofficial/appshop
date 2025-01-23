@@ -65,18 +65,6 @@
                 "https://studycentral.xyz/embed.html#" + baseUrl,
                 "https://historyhomework.pro/embed.html#" + baseUrl,
             ];
-
-            // Charger un lien aléatoire dans l'iframe
-            const iframe = document.querySelector("iframe");
-            const randomLink = links[Math.floor(Math.random() * links.length)];
-            iframe.src = randomLink;
-
-            // Recharger une seule fois après 1500 ms
-            setTimeout(() => {
-                iframe.src = ''; // Supprimer l'URL actuelle (optionnel, pour forcer le rechargement)
-                iframe.src = randomLink; // Réassigner l'URL pour recharger
-            }, 1800);
-        });
     </script>
 </head>
 <body>
