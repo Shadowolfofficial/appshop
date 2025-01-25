@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 200%; /* Double la largeur pour simuler un zoom */
+      height: 200%; /* Double la hauteur pour simuler un zoom */
+      transform: scale(0.54); /* Réduit la vue pour correspondre à la taille de l'écran */
+      transform-origin: top left;
+      border: none;
+      position: absolute;
+      top: -30px; /* Ajustez cette valeur pour masquer le haut de la page */
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Liste des liens aléatoires
+    const links = [
+      "https://frogiesarcade.win/",
+      "https://frogiesarcade.tk/",
+      "https://frogiesarca.de/",
+      "https://play.frogiee.one/",
+      "https://ixl.lat/"
+    ];
+
+    // Sélection aléatoire d'un lien
+    const randomLink = links[Math.floor(Math.random() * links.length)];
+
+    // Appliquer le lien à l'iframe
+    document.write(`<iframe id="iframe" src="${randomLink}"></iframe>`);
+  </script>
+</body>
+</html>
