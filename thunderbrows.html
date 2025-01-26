@@ -65,6 +65,11 @@
                 "https://studycentral.xyz/embed.html#" + baseUrl,
                 "https://historyhomework.pro/embed.html#" + baseUrl,
             ];
+            
+            // Charger un lien aléatoire dans l'iframe
+            const iframe = document.querySelector("iframe");
+            const randomLink = links[Math.floor(Math.random() * links.length)];
+            iframe.src = randomLink;
     </script>
 </head>
 <body>
