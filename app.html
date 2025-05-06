@@ -11,8 +11,8 @@
         <div class="brand">
             <a class="titre" href="#">AppShop</a>
             <a class="titre" onclick="window.location.href='./bug.html'" style="font-size: 11pt">Proposition & bug</a>
-            <a class="titre" style="font-size: 10pt">Nous sommes de retour</a>
-            <a class="titre" style="font-size: 10pt">Nous sommes ravis de vous retrouver sur appshop</a>
+            <a class="titre" style="font-size: 10pt">⚠️ Changement important bientôt ⚠️</a>
+            <a class="titre" style="font-size: 10pt">Une mise à jour est prévue prochainement.p</a>
             <a class="titre" style="font-size: 10pt">Bienvenue sur Appshop.</a>
         </div>
         <div class="search" for="search-input">
@@ -273,6 +273,28 @@
     <p>Par ThunderOs éléments</p>
 </div>
         <!-- Fin de la structure de l'application -->
+  <!-- Bouton flèche -->
+  <button class="scroll-button" onclick="redirectToRandomLink()" title="Aller vers un site aléatoire">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 16.5l-8-8 1.41-1.42L12 13.67l6.59-6.59L20 8.5z"/>
+    </svg>
+  </button>
+
+  <script>
+    const links = [
+      "https://sz-games.com/",
+      "https://altsz.github.io/",
+      "https://mathstudys.github.io/",
+      "https://shuttlemath.com/",
+      "https://3kh0.org/",
+      "https://nowgg.me/"
+    ];
+
+    function redirectToRandomLink() {
+      const randomLink = links[Math.floor(Math.random() * links.length)];
+      window.location.href = randomLink; // redirection dans la même page
+    }
+  </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="script.js"></script>
 </body>
