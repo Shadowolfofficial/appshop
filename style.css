@@ -168,3 +168,34 @@ nav {
     }
 }
 /* Fin Original ThunderOs Element*/
+    .scroll-button {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background-color: #1e1e1e;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+      z-index: 9999;
+    }
+
+    .scroll-button:hover {
+      background-color: #333;
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    .scroll-button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
