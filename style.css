@@ -1,201 +1,187 @@
-/* Réinitialisation des styles par défaut */
+/* Variables CSS */
+:root {
+  --primary-color: #007BFF;
+  --background-dark: #212529;
+  --background-medium: #333;
+  --text-light: #fff;
+}
+
+/* Réinitialisation et styles de base */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #212529;
-    color: #fff; /* Couleur du texte adaptée pour contraster avec le fond */
-    line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
+/* Navigation compacte */
 nav {
-    background-color: #333;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-medium);
+  padding: 0.8rem 1rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
 }
 
 .titre {
-    font-size: 24px;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
+  font-size: 1.3rem;
+  color: var(--text-light);
+  letter-spacing: 1px;
+  transition: color 0.2s ease;
 }
 
 .titre:hover {
-    color: #007BFF;
+  color: var(--primary-color);
 }
 
+/* Barre de recherche */
 .search {
-    position: relative;
-    width: 200px;
-    margin: 20px auto;
+  position: relative;
+  max-width: 500px;
+  margin: 0.8rem auto;
 }
 
 #searchbar {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: #444;
-    color: #fff;
-    transition: background-color 0.3s ease, width 0.3s ease, padding 0.3s ease;
+  width: 100%;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  background-color: #444;
+  color: var(--text-light);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #searchbar:focus {
-    outline: none;
-    background-color: #555;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    width: 100%; /* Conserve la largeur lorsqu'elle est survolée */
-    padding: 10px 20px; /* Augmente le padding pour donner plus d'espace au texte */
+  background-color: #555;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+  outline: none;
 }
 
-/* Animation de changement de couleur et de taille pour la barre de recherche */
-@keyframes searchBarAnimation {
-    0% {
-        background-color: #444;
-        width: 100%;
-        padding: 10px;
-    }
-    50% {
-        background-color: #555;
-        width: 100%;
-        padding: 10px 20px;
-    }
-    100% {
-        background-color: #444;
-        width: 100%;
-        padding: 10px;
-    }
-}
-
-#searchbar:hover {
-    animation: searchBarAnimation 1s infinite;
-}
-
-
+/* Conteneur d'applications */
 .app-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.2rem;
+  padding: 1.2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* Cartes d'applications */
 .app-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    margin: 20px;
-    padding: 20px;
-    width: 200px;
-    text-align: center;
-    transition: 0.3s;
+  background: linear-gradient(145deg, #2b2b2b, #1f1f1f);
+  border-radius: 15px;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .app-card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .app-card img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
 .app-card h3 {
-    color: #000; /* Titre des applications en noir */
-    margin: 10px 0;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
 }
 
 .app-card p {
-    color: #666;
+  color: #aaa;
+  font-size: 0.9rem;
 }
 
-/* Animation de pulse pour les cartes d'applications */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
- }
-  70% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
- }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
- }
-}
-
-.app-card:hover {
-    animation: pulse 1s infinite;
-}
-
-/* Debut Original ThunderOs Element*/
-
+/* Animation ThunderOS */
 .animated-text {
-    font-size: 16px;
-    font-weight: bold;
-    background: linear-gradient(45deg, #FF5733, #4A90E2, #FFD700, #E91E63); /* Dégradé de couleurs */
-    background-size: 400% 400%; /* Ajuste la taille du dégradé pour l'animation */
-    -webkit-background-clip: text; /* Applique le dégradé au texte */
-    color: transparent; /* Rend le texte transparent pour voir l'effet de dégradé */
-    animation: gradientAnimation 5s ease infinite; /* Animation de changement de dégradé */
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #FF5733, #4A90E2, #FFD700, #E91E63);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientAnimation 5s ease infinite;
 }
 
-/* Animation pour le dégradé */
 @keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
-/* Fin Original ThunderOs Element*/
-    .scroll-button {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 60px;
-      background-color: #1e1e1e;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      text-decoration: none;
-      z-index: 9999;
-    }
 
-    .scroll-button:hover {
-      background-color: #333;
-      transform: translateX(-50%) scale(1.05);
-    }
+/* Bouton de scroll */
+.scroll-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background-color: #1e1e1e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  z-index: 9999;
+}
 
-    .scroll-button svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
-    }
+.scroll-button:hover {
+  background-color: #333;
+  transform: translateX(-50%) scale(1.05);
+}
+
+.scroll-button svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav { padding: 0.6rem; }
+  .titre { font-size: 1.1rem; }
+  .app-container {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand { gap: 0.2rem; }
+  .titre { font-size: 1rem; }
+  #searchbar {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}
